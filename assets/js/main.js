@@ -545,7 +545,7 @@
 			xs_contact_submit.before().hide().fadeIn();
 			$.ajax({
 				type: 'POST',
-				url: 'assets/php/contact-form.php',
+				url: 'assets/php./contact-form.php',
 				data: {
 					xs_contact_name: xs_contact_name.val(),
 					xs_contact_email: xs_contact_email.val(),

@@ -477,7 +477,9 @@
                     contact form init
         ======================================================================*/
 
-	$(document).on('submit', '#xs-contact-form', function (event) {
+    let form = document.getElementById("#xs-contact-form");
+
+	form.onsubmit = function (event) {
 		event.preventDefault();
 		/* Act on the event */
 
@@ -492,70 +494,66 @@
 		$('.xpeedStudio_success_message').remove();
 
 		if (xs_contact_name.val().trim() === '') {
-			xs_contact_name.addClass('invaild');
+			xs_contact_name.addClass('invalid');
 			xs_contact_error = true;
 			xs_contact_name.focus();
 			return false;
 		} else {
-			xs_contact_name.removeClass('invaild');
+			xs_contact_name.removeClass('invalid');
 		}
 
 		if (xs_contact_email.val().trim() === '') {
-			xs_contact_email.addClass('invaild');
+			xs_contact_email.addClass('invalid');
 			xs_contact_error = true;
 			xs_contact_email.focus();
 			return false;
 		} else if (!email_pattern(xs_contact_email.val().toLowerCase())) {
-			xs_contact_email.addClass('invaild');
+			xs_contact_email.addClass('invalid');
 			xs_contact_error = true;
 			xs_contact_email.focus();
 			return false;
 		} else {
-			xs_contact_email.removeClass('invaild');
+			xs_contact_email.removeClass('invalid');
 		}
 
 		if (xs_contact_phone.val().trim() === '') {
-			xs_contact_phone.addClass('invaild');
+			xs_contact_phone.addClass('invalid');
 			xs_contact_error = true;
 			xs_contact_phone.focus();
 			return false;
 		} else {
-			xs_contact_phone.removeClass('invaild');
+			xs_contact_phone.removeClass('invalid');
 		}
 
 		if (xs_contact_subject.val().trim() === '') {
-			xs_contact_subject.addClass('invaild');
+			xs_contact_subject.addClass('invalid');
 			xs_contact_error = true;
 			xs_contact_subject.focus();
 			return false;
 		} else {
-			xs_contact_subject.removeClass('invaild');
+			xs_contact_subject.removeClass('invalid');
 		}
 
 		if (x_contact_massage.val().trim() === '') {
-			x_contact_massage.addClass('invaild');
+			x_contact_massage.addClass('invalid');
 			xs_contact_error = true;
 			x_contact_massage.focus();
 			return false;
 		} else {
-			x_contact_massage.removeClass('invaild');
+			x_contact_massage.removeClass('invalid');
 		}
 
 		if (xs_contact_error === false) {
 			xs_contact_submit.before().hide().fadeIn();
-			$.ajax({
-				type: 'POST',
-				url: 'assets/php./contact-form.php',
-				data: {
-					xs_contact_name: xs_contact_name.val(),
-					xs_contact_email: xs_contact_email.val(),
-					xs_contact_phone: xs_contact_phone.val(),
-					xs_contact_subject: xs_contact_subject.val(),
-					x_contact_massage: x_contact_massage.val(),
-				},
-				success: function (result) {
-					xs_contact_submit
-						.after('<p class="xpeedStudio_success_message">' + result + '</p>')
+
+            var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", form.action, true);
+            xhr.send(formData);
+            xhr.onload = function(e) {
+                if (xhr.status === 200) {
+                   xs_contact_submit
+						.after('<p class="xpeedStudio_success_message">Thanks! We\'ll get to you soon!</p>')
 						.hide()
 						.fadeIn();
 
@@ -566,10 +564,24 @@
 					}, 5000);
 
 					$('#xs-contact-form')[0].reset();
-				},
-			});
+                } else {
+                    var response = JSON.parse(xhr.response);
+                    xs_contact_submit
+						.after('<p class="xpeedStudio_success_message">' + response.error + '</p>')
+						.hide()
+						.fadeIn();
+
+					setTimeout(() => {
+						$('.xpeedStudio_success_message').fadeOut(1000, function () {
+							$(this).remove();
+						});
+					}, 5000);
+
+					$('#xs-contact-form')[0].reset();
+                }
+            };
 		}
-	});
+	};
 
 	/*==========================================================
      comment reply smooth scrolling

@@ -1075,6 +1075,7 @@ h6 {
     line-height: 7rem;
     font-family: var(--title-font), sans-serif;
     letter-spacing: 0.5rem;
+    text-shadow: 3px 3px 10px black;
 }
 
 .xs-banner-sec .banner-slider-item .banner-content p {
@@ -3085,19 +3086,19 @@ h6 {
 }
 
 .testmonial-sec .call-back-content .call-back-form .call-back-inp::-webkit-input-placeholder {
-    color: #535353;
+    color: #ffffff;
 }
 
 .testmonial-sec .call-back-content .call-back-form .call-back-inp:-ms-input-placeholder {
-    color: #535353;
+    color: #ffffff;
 }
 
 .testmonial-sec .call-back-content .call-back-form .call-back-inp::-ms-input-placeholder {
-    color: #535353;
+    color: #ffffff;
 }
 
 .testmonial-sec .call-back-content .call-back-form .call-back-inp::placeholder {
-    color: #535353;
+    color: #ffffff;
 }
 
 .testmonial-sec .call-back-content .call-back-form .call-back-inp:hover,
@@ -4312,6 +4313,7 @@ h6 {
     height: 360px;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 
 .banner-inner-sec::before {
@@ -5618,6 +5620,10 @@ h6 {
     border: 1px solid #eeeeee;
 }
 
+.xs-form-group .form-control::placeholder {
+    color: black !important;
+}
+
 .xs-contact-v2-sec .xs-form-group .xs-btn-wraper {
     text-align: center;
 }
@@ -5945,6 +5951,7 @@ h6 {
     -webkit-text-fill-color: #fff;
     font-size: 3rem;
     line-height: 4rem;
+    text-shadow: 3px 3px 10px black;
 }
 
 .text-phone-number {
@@ -6108,7 +6115,3 @@ h6 {
 
 
 /* new styles */
-
-.text-main {
-    color: var(--primary-color) !important;
-}

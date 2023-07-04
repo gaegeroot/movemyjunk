@@ -6115,3 +6115,7 @@ h6 {
 
 
 /* new styles */
+
+#proChatIframeContainer {
+    z-index: 9999 !important;
+}
